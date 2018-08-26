@@ -12,12 +12,32 @@ const schema = gql`
     me: User
     user(id: ID!): User
     users: [User!]
+
+    blogPost(id: ID!): BlogPost
+    blogPosts: [BlogPost!]
   }
 
   type User {
     id: ID!
     username: String!
     email: String!
+    blogPosts: [BlogPost!]
+    comments: [Comment!]
+  }
+
+  type BlogPost {
+    id: ID!
+    title: String!
+    user: User!
+    content: String!
+    comments: [Comment!]
+  }
+
+  type Comment {
+    id: ID!
+    user: User!
+    blogPost: BlogPost!
+    content: String!
   }
 `;
 
@@ -31,6 +51,52 @@ const resolvers = {
     },
     users: () => {
       return Object.values(seedData.users);
+    },
+
+    blogPost: (parent, { id }) => {
+      return seedData.blogPosts[id];
+    },
+    blogPosts: () => {
+      return Object.values(seedData.blogPosts);
+    }
+  },
+
+  User: {
+    blogPosts: (parent) => {
+      return (
+        Object.values(seedData.blogPosts).filter(post => {
+          return post.userId === parent.id;
+        })
+      );
+    },
+    comments: (parent) => {
+      return (
+        Object.values(seedData.comments).filter(comment => {
+          return comment.userId === parent.id;
+        })
+      );
+    }
+  },
+
+  BlogPost: {
+    comments: (parent) => {
+      return (
+        Object.values(seedData.comments).filter(comment => {
+          return comment.blogPostId === parent.id;
+        })
+      );
+    },
+    user: (parent) => {
+      return seedData.users[parent.userId];
+    }
+  },
+
+  Comment: {
+    user: (parent) => {
+      return seedData.users[parent.userId];
+    },
+    blogPost: (parent) => {
+      return seedData.blogPosts[parent.blogPostId];
     }
   }
 };
