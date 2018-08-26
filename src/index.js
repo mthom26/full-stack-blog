@@ -3,24 +3,34 @@ import 'dotenv/config';
 import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
 
+import seedData from './seedData';
+
 const app = express();
 
 const schema = gql`
   type Query {
     me: User
+    user(id: ID!): User
+    users: [User!]
   }
 
   type User {
+    id: ID!
     username: String!
+    email: String!
   }
 `;
 
 const resolvers = {
   Query: {
     me: () => {
-      return {
-        username: 'Test Username'
-      }
+      return seedData.users[1];
+    },
+    user: (parent, { id }) => {
+      return seedData.users[id];
+    },
+    users: () => {
+      return Object.values(seedData.users);
     }
   }
 };
