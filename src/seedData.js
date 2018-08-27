@@ -95,4 +95,125 @@ const seedData = {
   }
 };
 
-export default seedData;
+const seedDatabase = async (models) => {
+  await models.User.create(
+    {
+      username: 'Top Noob',
+      email: 'topnoob@email.com',
+      blogPosts: [
+        {
+          title: 'Top Noob BlogPost 1',
+          content: 'Pressing Buttonz!'
+        }
+      ],
+      comments: [
+        {
+          content: 'Comment by Top Noob for Blog Post 1',
+          blogPostId: '1'
+        }
+      ]
+    },
+    {
+      include: [models.BlogPost, models.Comment]
+    }
+  );
+
+  await models.User.create(
+    {
+      username: 'Jimmy',
+      email: 'jimmy@email.com',
+      blogPosts: [
+        {
+          title: 'Jimmy\'s BlogPost',
+          content: 'This is a blogpost!!!'
+        }
+      ],
+      comments: [
+        {
+          content: 'Comment by Jimmy',
+          blogPostId: '1'
+        }
+      ]
+    },
+    {
+      include: [models.BlogPost, models.Comment]
+    }
+  );
+
+  await models.User.create(
+    {
+      username: 'Ben',
+      email: 'ben@email.com',
+      blogPosts: [],
+      comments: [
+        {
+          content: 'Comment by Ben for Blog Post 2',
+          blogPostId: '2'
+        }
+      ]
+    },
+    {
+      include: [models.BlogPost, models.Comment]
+    }
+  );
+
+  await models.User.create(
+    {
+      username: 'Jamie',
+      email: 'jamie@email.com',
+      blogPosts: [
+        {
+          title: 'Jamie\'s Blog Post',
+          content: 'Blah blah blah'
+        }
+      ],
+      comments: [
+        {
+          content: 'Jamie\'s first comment!',
+          blogPostId: '1'
+        },
+        {
+          content: 'Jamie\'s second comment!!',
+          blogPostId: '2'
+        }
+      ]
+    },
+    {
+      include: [models.BlogPost, models.Comment]
+    }
+  );
+
+  await models.User.create(
+    {
+      username: 'Keyboard Kittie',
+      email: 'keyboardkat@email.com',
+      blogPosts: [
+        {
+          title: 'Meow',
+          content: 'Blah blah blah'
+        },
+        {
+          title: 'I like yarn',
+          content: 'Yarn, I like it... that is all.'
+        }
+      ],
+      comments: [
+        {
+          content: 'Hello world!',
+          blogPostId: '4'
+        },
+        {
+          content: 'Yes I am just commenting my own Blog Post...',
+          blogPostId: '4'
+        }
+      ]
+    },
+    {
+      include: [models.BlogPost, models.Comment]
+    }
+  );
+
+
+};
+
+export default seedDatabase;

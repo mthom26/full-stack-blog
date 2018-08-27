@@ -6,7 +6,7 @@ import { ApolloServer } from 'apollo-server-express';
 import models, { sequelize } from './models';
 import resolvers from './resolvers';
 import schema from './schema';
-
+import seedDatabase from './seedData';
 const app = express();
 
 /*
@@ -30,8 +30,13 @@ const server = new ApolloServer({
 server.applyMiddleware({ app, path: '/graphql'});
 
 const PORT = process.env.PORT || 8000;
+const eraseDBOnSync = true;
 
-sequelize.sync().then(async () => {
+sequelize.sync({ force: eraseDBOnSync }).then(async () => {
+  if(eraseDBOnSync) {
+    seedDatabase(models);
+  }
+
   app.listen(PORT, () => {
     console.log(`Server running on PORT: ${PORT}`);
   });
