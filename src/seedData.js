@@ -100,6 +100,7 @@ const seedDatabase = async (models) => {
     {
       username: 'Top Noob',
       email: 'topnoob@email.com',
+      password: 'password',
       blogPosts: [
         {
           title: 'Top Noob BlogPost 1',
@@ -122,6 +123,7 @@ const seedDatabase = async (models) => {
     {
       username: 'Jimmy',
       email: 'jimmy@email.com',
+      password: 'password',
       blogPosts: [
         {
           title: 'Jimmy\'s BlogPost',
@@ -144,6 +146,7 @@ const seedDatabase = async (models) => {
     {
       username: 'Ben',
       email: 'ben@email.com',
+      password: 'password',
       blogPosts: [],
       comments: [
         {
@@ -161,6 +164,7 @@ const seedDatabase = async (models) => {
     {
       username: 'Jamie',
       email: 'jamie@email.com',
+      password: 'password',
       blogPosts: [
         {
           title: 'Jamie\'s Blog Post',
@@ -187,6 +191,7 @@ const seedDatabase = async (models) => {
     {
       username: 'Keyboard Kittie',
       email: 'keyboardkat@email.com',
+      password: 'password',
       blogPosts: [
         {
           title: 'Meow',

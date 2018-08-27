@@ -5,6 +5,9 @@ const user = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING
+    },
+    password: {
+      type: DataTypes.STRING
     }
   });
 
