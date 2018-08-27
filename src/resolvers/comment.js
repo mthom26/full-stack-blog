@@ -1,19 +1,19 @@
 export default {
   Query: {
-    comment: (parent, { id }, { models }) => {
-      return models.comments[id];
+    comment: async (parent, { id }, { models }) => {
+      return await models.Comment.findById(id);
     },
-    comments: (parent, args, { models }) => {
-      return Object.values(models.comments);
+    comments: async (parent, args, { models }) => {
+      return await models.Comment.findAll();
     }
   },
 
   Comment: {
-    user: (parent, args, { models }) => {
-      return models.users[parent.userId];
+    user: async (parent, args, { models }) => {
+      return await models.User.findById(parent.userId);
     },
-    blogPost: (parent, args, { models }) => {
-      return models.blogPosts[parent.blogPostId];
+    blogPost: async (parent, args, { models }) => {
+      return await models.BlogPost.findById(parent.blogPostId);
     }
   }
 };
