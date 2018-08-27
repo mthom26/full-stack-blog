@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 
-import models from './models';
+import models, { sequelize } from './models';
 import resolvers from './resolvers';
 import schema from './schema';
 
@@ -23,7 +23,7 @@ const server = new ApolloServer({
   },
   context: {
     models,
-    me: models.users[1]
+    me: null
   }
 });
 
@@ -31,6 +31,8 @@ server.applyMiddleware({ app, path: '/graphql'});
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on PORT: ${PORT}`);
+sequelize.sync().then(async () => {
+  app.listen(PORT, () => {
+    console.log(`Server running on PORT: ${PORT}`);
+  });
 });
