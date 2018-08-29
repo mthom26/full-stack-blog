@@ -1,10 +1,10 @@
 export default {
   Query: {
-    blogPost: async (parent, { id }, { models }) => {
-      return await models.BlogPost.findById(id);
+    blogPost: async (parent, { id }, { db, blogPostFuncs }) => {
+      return await blogPostFuncs.getBlogPost(db, id);
     },
-    blogPosts: async (parent, args, { models }) => {
-      return await models.BlogPost.findAll();
+    blogPosts: async (parent, args, { db, blogPostFuncs }) => {
+      return await blogPostFuncs.getAllBlogPosts(db);
     }
   },
 

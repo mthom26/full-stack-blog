@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 
-import db, { userFuncs } from './models';
+import db, { userFuncs, blogPostFuncs, commentFuncs } from './models';
 import resolvers from './resolvers';
 import schema from './schema';
 import seedDatabase from './seedData';
@@ -24,6 +24,8 @@ const server = new ApolloServer({
   context: {
     db,
     userFuncs,
+    blogPostFuncs,
+    commentFuncs,
     me: null
   }
 });

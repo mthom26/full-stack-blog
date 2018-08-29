@@ -1,10 +1,10 @@
 export default {
   Query: {
-    comment: async (parent, { id }, { models }) => {
-      return await models.Comment.findById(id);
+    comment: async (parent, { id }, { db, commentFuncs }) => {
+      return await commentFuncs.getComment(db, id);
     },
-    comments: async (parent, args, { models }) => {
-      return await models.Comment.findAll();
+    comments: async (parent, args, { db, commentFuncs }) => {
+      return await commentFuncs.getAllComments(db);
     }
   },
 

@@ -1,3 +1,20 @@
+export const getBlogPost = (db, id) => {
+  return db.select('*').from('blogPosts')
+    .where('id', id)
+    .then(data => {
+      //console.log(data);
+      return data[0];
+    });
+};
+
+export const getAllBlogPosts = (db) => {
+  return db.select('*').from('blogPosts')
+    .then(data => {
+      //console.log(data);
+      return data;
+    });
+};
+/*
 const blogPost = (sequelize, DataTypes) => {
   const BlogPost = sequelize.define('blogPost', {
     title: {
@@ -17,3 +34,4 @@ const blogPost = (sequelize, DataTypes) => {
 }
 
 export default blogPost;
+*/

@@ -1,6 +1,8 @@
 import knex from 'knex';
 
 import * as userFuncs from './user';
+import * as blogPostFuncs from './blogPost';
+import * as commentFuncs from './comment';
 
 const db = knex({
   client: 'pg',
@@ -12,7 +14,7 @@ const db = knex({
   }
 });
 
-export { userFuncs };
+export { userFuncs, blogPostFuncs, commentFuncs };
 
 export default db;
 
