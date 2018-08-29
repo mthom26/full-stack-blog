@@ -4,14 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js"
+    "start": "nodemon --exec babel-node src/index.js",
+    "test-server": "(set TEST_DATABASE=fullstack-blog-test) && npm run start",
+    "test": "jest --colors",
+    "test-watch": "jest --watchAll --colors"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
+    "babel-jest": "^23.4.2",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "jest": "^23.5.0",
     "nodemon": "^1.18.3"
   },
   "dependencies": {

@@ -30,7 +30,7 @@ const server = new ApolloServer({
 server.applyMiddleware({ app, path: '/graphql'});
 
 const PORT = process.env.PORT || 8000;
-const eraseDBOnSync = true;
+const eraseDBOnSync = process.env.TEST_DATABASE ? true : false;
 
 sequelize.sync({ force: eraseDBOnSync }).then(async () => {
   if(eraseDBOnSync) {
@@ -40,4 +40,4 @@ sequelize.sync({ force: eraseDBOnSync }).then(async () => {
   app.listen(PORT, () => {
     console.log(`Server running on PORT: ${PORT}`);
   });
-});
+})

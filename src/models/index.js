@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
 const sequelize = new Sequelize(
-  process.env.DATABASE,
+  process.env.TEST_DATABASE || process.env.DATABASE,
   process.env.DATABASE_USER,
   process.env.DATABASE_PASSWORD,
   {
@@ -24,8 +24,3 @@ Object.keys(models).forEach(key => {
 export { sequelize };
 
 export default models;
-/*
-import seedData from '../seedData';
-
-export default seedData;
-*/
