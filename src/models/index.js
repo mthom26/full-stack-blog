@@ -1,3 +1,22 @@
+import knex from 'knex';
+
+import * as userFuncs from './user';
+
+const db = knex({
+  client: 'pg',
+  connection: {
+    host : '127.0.0.1',
+    user : 'postgres',
+    password : 'password',
+    database : 'fullstack-blog-test'
+  }
+});
+
+export { userFuncs };
+
+export default db;
+
+/*
 import Sequelize from 'sequelize';
 
 const sequelize = new Sequelize(
@@ -24,3 +43,4 @@ Object.keys(models).forEach(key => {
 export { sequelize };
 
 export default models;
+*/

@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 
-import models, { sequelize } from './models';
+import db, { userFuncs } from './models';
 import resolvers from './resolvers';
 import schema from './schema';
 import seedDatabase from './seedData';
@@ -22,7 +22,8 @@ const server = new ApolloServer({
     }
   },
   context: {
-    models,
+    db,
+    userFuncs,
     me: null
   }
 });
@@ -32,6 +33,10 @@ server.applyMiddleware({ app, path: '/graphql'});
 const PORT = process.env.PORT || 8000;
 const eraseDBOnSync = process.env.TEST_DATABASE ? true : false;
 
+app.listen(PORT, () => {
+  console.log(`Server running on PORT: ${PORT}`);
+});
+/*
 sequelize.sync({ force: eraseDBOnSync }).then(async () => {
   if(eraseDBOnSync) {
     seedDatabase(models);
@@ -41,3 +46,4 @@ sequelize.sync({ force: eraseDBOnSync }).then(async () => {
     console.log(`Server running on PORT: ${PORT}`);
   });
 })
+*/

@@ -2,14 +2,14 @@ import { UserInputError, AuthenticationError } from "apollo-server";
 
 export default {
   Query: {
-    me: async (parent, args, { models, me }) => {
-      return await models.User.findById(me.id);
+    me: async (parent, args, { db, userFuncs, me }) => {
+      return await userFuncs.getUser(db, '1');
     },
-    user: async (parent, { id }, { models }) => {
-      return await models.User.findById(id);
+    user: async (parent, { id }, { db, userFuncs }) => {
+      return await userFuncs.getUser(db, id);
     },
-    users: async (parent, args, { models }) => {
-      return await models.User.findAll();
+    users: async (parent, args, { db, userFuncs }) => {
+      return await userFuncs.getAllUsers(db);
     }
   },
 
