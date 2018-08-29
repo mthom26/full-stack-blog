@@ -17,3 +17,10 @@ export const user = (variables) => {
     })
   );
 };
+
+// Test function to make sure async/await works
+export const test = () => {
+  return (
+    axios.get('https://jsonplaceholder.typicode.com/posts/1')
+  );
+};
