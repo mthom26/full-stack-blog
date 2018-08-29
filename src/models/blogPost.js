@@ -14,24 +14,12 @@ export const getAllBlogPosts = (db) => {
       return data;
     });
 };
-/*
-const blogPost = (sequelize, DataTypes) => {
-  const BlogPost = sequelize.define('blogPost', {
-    title: {
-      type: DataTypes.STRING
-    },
-    content: {
-      type: DataTypes.STRING
-    }
-  });
 
-  BlogPost.associate = (models) => {
-    BlogPost.hasMany(models.Comment);
-    BlogPost.belongsTo(models.User);
-  };
-
-  return BlogPost;
-}
-
-export default blogPost;
-*/
+// idKey is the userId from parent User
+export const getChildBlogPosts = (db, id, idKey) => {
+  return db.select('*').from('blogPosts')
+    .where(idKey, id)
+    .then(data => {
+      return data;
+    });
+};

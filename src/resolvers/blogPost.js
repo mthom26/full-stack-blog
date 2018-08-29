@@ -9,17 +9,11 @@ export default {
   },
 
   BlogPost: {
-    comments: async (parent, args, { models }) => {
-      return (
-        await models.Comment.findAll({
-          where: {
-            blogPostId: parent.id
-          }
-        })
-      );
+    comments: async (parent, args, { db, commentFuncs }) => {
+      return await commentFuncs.getChildComments(db, parent.id, 'blogPostId');
     },
-    user: async (parent, args, { models }) => {
-      return await models.User.findById(parent.userId);
+    user: async (parent, args, { db, userFuncs }) => {
+      return userFuncs.getUser(db, parent.userId);
     }
   }
 };

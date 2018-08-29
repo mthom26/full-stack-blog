@@ -38,23 +38,11 @@ export default {
   },
 
   User: {
-    blogPosts: async (parent, args, { models }) => {
-      return (
-        await models.BlogPost.findAll({
-          where: {
-            userId: parent.id
-          }
-        })
-      );
+    blogPosts: async (parent, args, { db, blogPostFuncs }) => {
+      return await blogPostFuncs.getChildBlogPosts(db, parent.id, 'userId');
     },
-    comments: async (parent, args, { models }) => {
-      return (
-        await models.Comment.findAll({
-          where: {
-            userId: parent.id
-          }
-        })
-      );
+    comments: async (parent, args, { db, commentFuncs }) => {
+      return await commentFuncs.getChildComments(db, parent.id, 'userId');
     }
   }
 };

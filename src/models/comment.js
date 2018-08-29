@@ -14,21 +14,12 @@ export const getAllComments = (db) => {
       return data;
     });
 };
-/*
-const comment = (sequelize, DataTypes) => {
-  const Comment = sequelize.define('comment', {
-    content: {
-      type: DataTypes.STRING
-    }
-  });
 
-  Comment.associate = (models) => {
-    Comment.belongsTo(models.BlogPost);
-    Comment.belongsTo(models.User);
-  };
-
-  return Comment;
+// idKey is the userId/blogPostId depending on the resolver
+export const getChildComments = (db, id, idKey) => {
+  return db.select('*').from('comments')
+    .where(idKey, id)
+    .then(data => {
+      return data;
+    });
 };
-
-export default comment;
-*/

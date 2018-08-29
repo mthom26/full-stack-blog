@@ -9,11 +9,11 @@ export default {
   },
 
   Comment: {
-    user: async (parent, args, { models }) => {
-      return await models.User.findById(parent.userId);
+    user: async (parent, args, { db, userFuncs }) => {
+      return await userFuncs.getUser(db, parent.userId);
     },
-    blogPost: async (parent, args, { models }) => {
-      return await models.BlogPost.findById(parent.blogPostId);
+    blogPost: async (parent, args, { db, blogPostFuncs }) => {
+      return await blogPostFuncs.getBlogPost(db, parent.blogPostId);
     }
   }
 };
