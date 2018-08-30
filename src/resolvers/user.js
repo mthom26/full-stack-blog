@@ -14,19 +14,15 @@ export default {
   },
 
   Mutation: {
-    signUp: async (parent, { username, email, password }, { models }) => {
-      const user = await models.User.create({
-        username,
-        email,
-        password
-      });
-
+    signUp: async (parent, { username, email, password }, { db, userFuncs }) => {
+      const user = await userFuncs.createUser(db, { username, email, password });
+      if(!user) {
+        // Throw some error
+      }
       return { token: 'Token' };
     },
-    signIn: async (parent, { email, password }, { models }) => {
-      const user = await models.User.findOne({
-        where: { email: email }
-      });
+    signIn: async (parent, { email, password }, { db, userFuncs }) => {
+      const user = await userFuncs.getUserByEmail(db, email);
       if(!user) {
         throw new UserInputError('User not found.');
       } 
