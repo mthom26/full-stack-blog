@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const API_URL = 'http://localhost:8000/graphql';
 
 const getUserById = (variables) => (
@@ -25,7 +24,6 @@ const getBlogPostById = (variables) => (
           id
           title
           content
-          userId
         }
       }
     `,
@@ -39,8 +37,7 @@ const getCommentById = (variables) => (
       query($id: ID!) {
         comment(id: $id) {
           id
-          username
-          email
+          content
         }
       }
     `,
@@ -48,4 +45,4 @@ const getCommentById = (variables) => (
   })
 );
 
-export { getUserById, getCommentById, getBlogPostById };
+export { getCommentById, getUserById, getBlogPostById };

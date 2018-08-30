@@ -1,4 +1,4 @@
-import { getUserById, getCommentById, getBlogPostById } from './api';
+import { getCommentById, getBlogPostById, getUserById } from './api';
 import { seedData } from '../seedData';
 
 describe('top level queries', () => {
@@ -23,7 +23,6 @@ describe('top level queries', () => {
         blogPost: {
           title: seedData.blogPosts[0].title,
           content: seedData.blogPosts[0].content,
-          userId: seedData.blogPosts[0].userId,
           id: '1'
         }
       };
@@ -38,8 +37,6 @@ describe('top level queries', () => {
       const expectedResult = {
         comment: {
           content: seedData.comments[0].content,
-          userId: seedData.comments[0].userId,
-          blogPostId: seedData.comments[0].blogPostId,
           id: '1'
         }
       };
