@@ -16,7 +16,7 @@ export const getAllUsers = (db) => {
 };
 
 export const createUser = (db, userData) => {
-  return db('users').insert({
+  return db('users').returning('id').insert({
     username: userData.username,
     email: userData.email,
     password: userData.password

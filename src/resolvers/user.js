@@ -1,5 +1,7 @@
 import { UserInputError, AuthenticationError } from "apollo-server";
 
+import { createToken, createHash } from '../utils';
+
 export default {
   Query: {
     me: async (parent, args, { db, userFuncs, me }) => {
@@ -15,11 +17,19 @@ export default {
 
   Mutation: {
     signUp: async (parent, { username, email, password }, { db, userFuncs }) => {
-      const user = await userFuncs.createUser(db, { username, email, password });
-      if(!user) {
+      const hash = await createHash(password);
+      console.log(hash);
+      const id = await userFuncs.createUser(db, { 
+        username,
+        email,
+        password: hash
+      });
+      
+      if(!id) {
         // Throw some error
       }
-      return { token: 'Token' };
+      const tokenData = { id: id[0], username, email };
+      return { token: createToken(tokenData) };
     },
     signIn: async (parent, { email, password }, { db, userFuncs }) => {
       const user = await userFuncs.getUserByEmail(db, email);
@@ -29,7 +39,13 @@ export default {
       if(user.password !== password) {
         throw new AuthenticationError('Invalid Password.');
       } 
-      return { token: 'Token' };
+      
+      const tokenData = {
+        username: user.username,
+        email: user.email,
+        id: user.id
+      };
+      return { token: createToken(tokenData) };
     }
   },
 

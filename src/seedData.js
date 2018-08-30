@@ -1,4 +1,5 @@
 import { resolve } from "path";
+import bcrypt from 'bcrypt';
 
 const seedData_old = {
   users: {
@@ -228,17 +229,17 @@ const seedData = {
     {
       username: 'Top Noob',
       email: 'topnoob@email.com',
-      password: 'password'
+      password: bcrypt.hashSync('password', 10)
     },
     {
       username: 'Jimmy',
       email: 'jimmy@email.com',
-      password: 'password'
+      password: bcrypt.hashSync('password', 10)
     },
     {
       username: 'Keyboard Cat',
       email: 'keyboardkittie@email.com',
-      password: 'password'
+      password: bcrypt.hashSync('password', 10)
     }
   ],
 
