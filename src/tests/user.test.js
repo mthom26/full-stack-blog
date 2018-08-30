@@ -1,8 +1,8 @@
 import * as userApi from './api';
 
-describe('users', () => {
+describe('top level queries', () => {
   describe('user(id: String!): User', () => {
-    it('returns correct from variable', async () => {
+    it('returns correct user', async () => {
       const expectedResult = {
         data: {
           user: {

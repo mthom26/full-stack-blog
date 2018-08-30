@@ -6,7 +6,7 @@ import { ApolloServer } from 'apollo-server-express';
 import db, { userFuncs, blogPostFuncs, commentFuncs } from './models';
 import resolvers from './resolvers';
 import schema from './schema';
-import seedDatabase from './seedData';
+
 const app = express();
 
 /*
