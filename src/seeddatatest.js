@@ -3,6 +3,11 @@ import db from './models';
 
 console.log('Seeding db...');
 
-seedDatabase(db).then(() => {
-  console.log('success')
-});
+async function go(db) {
+  await seedDatabase(db);
+  
+}
+
+go(db);
+console.log('finished!');
+process.exit();

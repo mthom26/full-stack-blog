@@ -7,7 +7,7 @@
     "start": "nodemon --exec babel-node src/index.js",
     "seed-test": "babel-node src/seeddatatest.js",
     "test-server": "(set TEST_DATABASE=fullstack-blog-test) && npm run start",
-    "test": "jest --colors",
+    "test": "jest --colors --verbose",
     "test-watch": "jest --watchAll --colors"
   },
   "author": "",

@@ -1,3 +1,5 @@
+import { resolve } from "path";
+
 const seedData_old = {
   users: {
     1: {
