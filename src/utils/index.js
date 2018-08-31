@@ -8,8 +8,12 @@ const createToken = async (user) => {
   return await jwt.sign({ id, username, email }, SECRET);
 };
 
+const verifyToken = async (token) => {
+  return await jwt.verify(token, SECRET);
+}
+
 const createHash = async (toBeHashed) => {
   return await bcrypt.hash(toBeHashed, 10);
 };
 
-export { createToken, createHash };
+export { createToken, verifyToken, createHash };

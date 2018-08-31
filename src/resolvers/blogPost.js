@@ -1,3 +1,7 @@
+import { combineResolvers } from 'graphql-resolvers';
+
+import { isAuthenticated } from './authorization';
+
 export default {
   Query: {
     blogPost: async (parent, { id }, { db, blogPostFuncs }) => {
@@ -6,6 +10,23 @@ export default {
     blogPosts: async (parent, args, { db, blogPostFuncs }) => {
       return await blogPostFuncs.getAllBlogPosts(db);
     }
+  },
+
+  Mutation: {
+    createBlogPost: combineResolvers(
+      isAuthenticated,
+      async (parent, { title, content }, { db, blogPostFuncs, authUser }) => {
+        const blogPostData = {
+          title,
+          content,
+          userId: authUser.id
+        };
+        const blogPostId = await blogPostFuncs.createBlogPost(db, blogPostData);
+
+        return { id: blogPostId, ...blogPostData };
+      }
+    )
+    
   },
 
   BlogPost: {

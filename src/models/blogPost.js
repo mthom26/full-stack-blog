@@ -23,3 +23,9 @@ export const getChildBlogPosts = (db, id, idKey) => {
       return data;
     });
 };
+
+export const createBlogPost = (db, blogPost) => {
+  return db('blogPosts').returning('id').insert({
+    ...blogPost
+  });
+}

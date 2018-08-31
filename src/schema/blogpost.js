@@ -6,6 +6,13 @@ export default gql`
     blogPosts: [BlogPost!]
   }
 
+  extend type Mutation {
+    createBlogPost(
+      title: String!
+      content: String!
+    ): BlogPost!
+  }
+
   type BlogPost {
     id: ID!
     title: String!

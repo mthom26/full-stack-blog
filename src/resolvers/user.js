@@ -18,7 +18,7 @@ export default {
   Mutation: {
     signUp: async (parent, { username, email, password }, { db, userFuncs }) => {
       const hash = await createHash(password);
-      console.log(hash);
+      //console.log(hash);
       const id = await userFuncs.createUser(db, { 
         username,
         email,
