@@ -1,6 +1,6 @@
 import { combineResolvers } from 'graphql-resolvers';
 
-import { isAuthenticated } from './authorization';
+import { isAuthenticated, isBlogPostOwner } from './authorization';
 
 export default {
   Query: {
@@ -24,6 +24,14 @@ export default {
         const blogPostId = await blogPostFuncs.createBlogPost(db, blogPostData);
 
         return { id: blogPostId, ...blogPostData };
+      }
+    ),
+
+    deleteBlogPost: combineResolvers(
+      isBlogPostOwner,
+      async (parent, { id }, { db, blogPostFuncs }) => {
+        await blogPostFuncs.deleteBlogPost(db, id);
+        return true;
       }
     )
     

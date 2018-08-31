@@ -6,4 +6,13 @@ const isAuthenticated = (parent, args, { authUser }) => {
   return authUser ? skip : new ForbiddenError('Not authenticated as user.');
 };
 
-export { isAuthenticated };
+const isBlogPostOwner = async (parent, { id }, { db, authUser, blogPostFuncs }) => {
+  const blogPost = await blogPostFuncs.getBlogPost(db, id);
+
+  if(blogPost.userId != authUser.id) {
+    throw new ForbiddenError('Not authorized.')
+  }
+  return skip;
+}
+
+export { isAuthenticated, isBlogPostOwner };

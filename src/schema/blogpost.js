@@ -11,6 +11,8 @@ export default gql`
       title: String!
       content: String!
     ): BlogPost!
+
+    deleteBlogPost(id: String!): Boolean!
   }
 
   type BlogPost {
