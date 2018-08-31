@@ -1,48 +1,10 @@
 import axios from 'axios';
 const API_URL = 'http://localhost:8000/graphql';
 
-const getUserById = (variables) => (
+const apiPost = (query, variables) => (
   axios.post(API_URL, {
-    query: `
-      query($id: ID!) {
-        user(id: $id) {
-          id
-          username
-          email
-        }
-      }
-    `,
-    variables
+    query, variables
   })
 );
 
-const getBlogPostById = (variables) => (
-  axios.post(API_URL, {
-    query: `
-      query($id: ID!) {
-        blogPost(id: $id) {
-          id
-          title
-          content
-        }
-      }
-    `,
-    variables
-  })
-);
-
-const getCommentById = (variables) => (
-  axios.post(API_URL, {
-    query:`
-      query($id: ID!) {
-        comment(id: $id) {
-          id
-          content
-        }
-      }
-    `,
-    variables
-  })
-);
-
-export { getCommentById, getUserById, getBlogPostById };
+export { apiPost };

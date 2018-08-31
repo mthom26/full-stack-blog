@@ -1,4 +1,4 @@
-import { getCommentById, getBlogPostById, getUserById } from './api';
+import { apiPost } from './api';
 import { seedData } from '../seedData';
 
 describe('top level queries', () => {
@@ -11,8 +11,18 @@ describe('top level queries', () => {
           id: '1'
         }
       };
+
+      const query = `
+        query($id: ID!) {
+          user(id: $id) {
+            id
+            username
+            email
+          }
+        }
+      `;
       
-      const result = await getUserById({id: "1"});
+      const result = await apiPost(query, {id: "1"});
       expect(result.data.data).toEqual(expectedResult);
     })
   });
@@ -27,7 +37,16 @@ describe('top level queries', () => {
         }
       };
       
-      const result = await getBlogPostById({id: "1"});
+      const query = `
+        query($id: ID!) {
+          blogPost(id: $id) {
+            id
+            title
+            content
+          }
+        }
+      `;
+      const result = await apiPost(query, {id: "1"});
       expect(result.data.data).toEqual(expectedResult);
     })
   });
@@ -41,7 +60,15 @@ describe('top level queries', () => {
         }
       };
       
-      const result = await getCommentById({id: "1"});
+      const query = `
+        query($id: ID!) {
+          comment(id: $id) {
+            id
+            content
+          }
+        }
+      `;
+      const result = await apiPost(query, {id: "1"});
       expect(result.data.data).toEqual(expectedResult);
     })
   });
