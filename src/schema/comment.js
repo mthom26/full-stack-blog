@@ -6,6 +6,13 @@ export default gql `
     comments: [Comment!]
   }
 
+  extend type Mutation {
+    createComment(
+      blogPostId: String!
+      content: String!
+    ): Comment!
+  }
+
   type Comment {
     id: ID!
     user: User!

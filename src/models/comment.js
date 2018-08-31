@@ -23,3 +23,9 @@ export const getChildComments = (db, id, idKey) => {
       return data;
     });
 };
+
+export const createComment = (db, comment) => {
+  return db('comments').returning('id').insert({
+    ...comment
+  });
+}

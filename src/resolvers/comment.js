@@ -1,3 +1,7 @@
+import { combineResolvers } from 'graphql-resolvers';
+
+import { isAuthenticated } from './authorization';
+
 export default {
   Query: {
     comment: async (parent, { id }, { db, commentFuncs }) => {
@@ -6,6 +10,22 @@ export default {
     comments: async (parent, args, { db, commentFuncs }) => {
       return await commentFuncs.getAllComments(db);
     }
+  },
+
+  Mutation: {
+    createComment: combineResolvers(
+      isAuthenticated,
+      async (parent, { content, blogPostId }, { db, commentFuncs, authUser }) => {
+        const commentData = {
+          content,
+          blogPostId,
+          userId: authUser.id
+        }
+        const commentId = await commentFuncs.createComment(db, commentData);
+
+        return { id: commentId, ...commentData };
+      }
+    )
   },
 
   Comment: {
