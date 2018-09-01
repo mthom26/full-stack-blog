@@ -11,6 +11,8 @@ export default gql `
       blogPostId: String!
       content: String!
     ): Comment!
+
+    deleteComment(id: String!): Boolean!
   }
 
   type Comment {

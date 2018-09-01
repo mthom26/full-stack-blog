@@ -28,4 +28,8 @@ export const createComment = (db, comment) => {
   return db('comments').returning('id').insert({
     ...comment
   });
-}
+};
+
+export const deleteComment = (db, id) => {
+  return db('comments').where('id', id).del();
+};

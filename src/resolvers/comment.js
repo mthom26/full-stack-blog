@@ -1,6 +1,6 @@
 import { combineResolvers } from 'graphql-resolvers';
 
-import { isAuthenticated } from './authorization';
+import { isAuthenticated, isCommentOwner } from './authorization';
 
 export default {
   Query: {
@@ -24,6 +24,14 @@ export default {
         const commentId = await commentFuncs.createComment(db, commentData);
 
         return { id: commentId, ...commentData };
+      }
+    ),
+
+    deleteComment: combineResolvers(
+      isCommentOwner,
+      async (parent, { id }, { db, commentFuncs }) => {
+        await commentFuncs.deleteComment(db, id);
+        return true;
       }
     )
   },
