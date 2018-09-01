@@ -1,6 +1,6 @@
 import { UserInputError, AuthenticationError } from "apollo-server";
 
-import { createToken, createHash } from '../utils';
+import { createToken, createHash, verifyHash } from '../utils';
 
 export default {
   Query: {
@@ -36,7 +36,9 @@ export default {
       if(!user) {
         throw new UserInputError('User not found.');
       } 
-      if(user.password !== password) {
+
+      const isValid = await verifyHash(password, user.password);
+      if(!isValid) {
         throw new AuthenticationError('Invalid Password.');
       } 
       

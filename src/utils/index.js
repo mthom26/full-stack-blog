@@ -16,4 +16,8 @@ const createHash = async (toBeHashed) => {
   return await bcrypt.hash(toBeHashed, 10);
 };
 
-export { createToken, verifyToken, createHash };
+const verifyHash = async (password, hash) => {
+  return await bcrypt.compare(password, hash);
+};
+
+export { createToken, verifyToken, createHash, verifyHash };
