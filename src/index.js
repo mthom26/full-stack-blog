@@ -36,7 +36,7 @@ const server = new ApolloServer({
   },
   context: async ({ req }) => {
     const authUser = await getAuthUser(req);
-    //console.log(authUser);
+   
     return {
       db,
       userFuncs,

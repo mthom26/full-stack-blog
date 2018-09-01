@@ -18,7 +18,6 @@ export default {
   Mutation: {
     signUp: async (parent, { username, email, password }, { db, userFuncs }) => {
       const hash = await createHash(password);
-      //console.log(hash);
       const id = await userFuncs.createUser(db, { 
         username,
         email,
@@ -26,7 +25,7 @@ export default {
       });
       
       if(!id) {
-        // Throw some error
+        throw new AuthenticationError('Could not create User.')
       }
       const tokenData = { id: id[0], username, email };
       return { token: createToken(tokenData) };
